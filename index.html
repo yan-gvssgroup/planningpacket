@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>H2 2026 Pre-Planning Packet — GVSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#FAF7F1;
+  --paper-deep:#F1ECE0;
+  --line:#DFD6C0;
+  --ink:#20242B;
+  --ink-soft:#5B6169;
+  --ink-faint:#8B8F94;
+  --brass:#A9791F;
+  --brass-dark:#7C591A;
+  --brass-tint:#F1E4C4;
+  --forest:#3F5C4C;
+  --forest-tint:#E3EBE5;
+  --rust:#8B5A44;
+  --rust-tint:#EFE2DA;
+  --slate:#4F6274;
+  --slate-tint:#E4E9EE;
+  --plum:#6C4F66;
+  --plum-tint:#EAE1E7;
+  --panel:#FFFFFF;
+  --shadow: 0 1px 2px rgba(32,36,43,0.06), 0 8px 24px rgba(32,36,43,0.06);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper-deep);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
+  max-width:1280px;
+  margin:0 auto;
+  background:var(--paper);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- LEFT TAB RAIL ---------- */
+.rail{
+  width:88px;
+  flex-shrink:0;
+  background:var(--ink);
+  color:var(--paper);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.rail-top{
+  padding:22px 0 8px;
+  text-align:center;
+  border-bottom:1px solid rgba(250,247,241,0.14);
+}
+.rail-mark{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--brass-tint);
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  margin:0 auto 14px;
+  height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.rail-tabs{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding-top:6px;
+}
+.tab{
+  all:unset;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding:18px 6px;
+  border-left:3px solid transparent;
+  color:rgba(250,247,241,0.55);
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.tab:hover{ background:rgba(250,247,241,0.06); color:rgba(250,247,241,0.85); }
+.tab.active{
+  background:var(--paper);
+  color:var(--ink);
+  border-left:3px solid var(--brass);
+}
+.tab .num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.04em;
+}
+.tab .label{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.rail-bottom{
+  padding:16px 8px 20px;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;
+  line-height:1.5;
+  color:rgba(250,247,241,0.4);
+  letter-spacing:0.03em;
+  border-top:1px solid rgba(250,247,241,0.14);
+}
+
+/* ---------- MAIN ---------- */
+main{
+  flex:1;
+  min-width:0;
+  position:relative;
+}
+.page{ display:none; padding:64px 72px 90px; animation:fade .35s ease; }
+.page.active{ display:block; }
+@keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--brass-dark);
+  font-weight:600;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{
+  content:"";
+  width:22px; height:1px; background:var(--brass);
+}
+h1.page-title{
+  font-family:'Source Serif 4',serif;
+  font-weight:600;
+  font-size:44px;
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-0.01em;
+}
+.page-sub{
+  font-size:16px;
+  color:var(--ink-soft);
+  max-width:640px;
+  margin:0 0 40px;
+  line-height:1.55;
+}
+
+/* ---------- COVER ---------- */
+.cover-hero{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  padding:52px 56px;
+  position:relative;
+  overflow:hidden;
+}
+.cover-hero::before{
+  content:"";
+  position:absolute; left:0; top:0; bottom:0; width:5px;
+  background:linear-gradient(180deg,var(--brass),var(--forest));
+}
+.cover-kicker{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:20px;
+}
+.cover-title{
+  font-family:'Source Serif 4',serif;
+  font-weight:700;
+  font-size:56px;
+  line-height:1.03;
+  letter-spacing:-0.015em;
+  margin:0 0 14px;
+}
+.cover-title em{ font-style:italic; color:var(--brass-dark); }
+.cover-tagline{
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:560px;
+  margin:0 0 36px;
+  line-height:1.6;
+}
+.session-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:22px 0;
+}
+.session-item + .session-item{ border-left:1px solid var(--line); padding-left:28px; }
+.session-item{ padding-right:28px; }
+.session-item .k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:6px;
+}
+.session-item .v{ font-size:15px; font-weight:600; color:var(--ink); }
+
+.purpose-block{ margin-top:34px; }
+.purpose-block .k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--brass-dark);
+  font-weight:700;
+  margin-bottom:10px;
+}
+.purpose-block p{ font-size:15.5px; line-height:1.7; color:var(--ink); max-width:680px; margin:0; }
+
+.inside-grid{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.inside-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:20px 20px 22px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:border-color .15s ease, transform .15s ease;
+}
+.inside-card:hover{ border-color:var(--brass); transform:translateY(-2px); }
+.inside-card .n{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--brass-dark); font-weight:700; margin-bottom:10px;}
+.inside-card h3{ font-family:'Source Serif 4',serif; font-size:19px; margin:0 0 8px; font-weight:600; }
+.inside-card p{ font-size:13.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
+
+.status-note{
+  margin-top:36px;
+  font-size:13px;
+  color:var(--ink-faint);
+  font-style:italic;
+}
+
+/* ---------- AGENDA ---------- */
+.day-block{ margin-bottom:52px; }
+.day-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:6px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--ink);
+}
+.day-num{
+  font-family:'Source Serif 4',serif;
+  font-size:34px;
+  font-weight:700;
+  color:var(--brass-dark);
+}
+.day-head h2{
+  font-family:'Source Serif 4',serif;
+  font-size:24px;
+  margin:0;
+  font-weight:600;
+}
+.day-obj{ font-size:14px; color:var(--ink-soft); margin:10px 0 22px; max-width:680px; line-height:1.55; }
+
+.agenda-row{
+  display:grid;
+  grid-template-columns:118px 1fr 130px;
+  gap:24px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  align-items:start;
+}
+.agenda-row:first-of-type{ border-top:1px solid var(--line); }
+.agenda-time{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  color:var(--ink-faint);
+  padding-top:2px;
+}
+.agenda-what strong{
+  display:block;
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:4px;
+  color:var(--ink);
+}
+.agenda-what span{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  line-height:1.5;
+}
+.lead-badge{
+  justify-self:end;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  letter-spacing:0.03em;
+  color:var(--forest);
+  background:var(--forest-tint);
+  border-radius:20px;
+  padding:5px 11px;
+  text-align:center;
+  white-space:nowrap;
+  margin-top:2px;
+}
+.agenda-note{
+  margin-top:28px;
+  font-size:13px;
+  color:var(--ink-faint);
+  font-style:italic;
+  border-left:2px solid var(--line);
+  padding-left:14px;
+}
+
+/* ---------- AUDIT SUMMARY ---------- */
+.stat-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-bottom:44px;
+}
+.stat-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:24px 24px 20px;
+  border-radius:2px;
+}
+.stat-card .num{
+  font-family:'Source Serif 4',serif;
+  font-size:44px;
+  font-weight:700;
+  color:var(--ink);
+  line-height:1;
+}
+.stat-card .lbl{ font-size:13.5px; color:var(--ink-soft); margin-top:10px; font-weight:600;}
+.stat-card .sub{ font-size:12px; color:var(--ink-faint); margin-top:4px; }
+
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:52px 0 20px;
+}
+.section-head .dot{ width:9px; height:9px; border-radius:50%; }
+.section-head h2{
+  font-family:'Source Serif 4',serif;
+  font-size:22px;
+  font-weight:600;
+  margin:0;
+}
+.section-head .count{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--ink-faint);
+  margin-left:auto;
+}
+
+.audit-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:36px; }
+.bar-group{ margin-bottom:20px; }
+.bar-group .bg-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:12px;
+}
+.bar-row{ display:flex; align-items:center; gap:12px; margin-bottom:9px; }
+.bar-row .bl{ width:120px; font-size:13px; color:var(--ink); flex-shrink:0; }
+.bar-track{ flex:1; height:9px; background:var(--paper-deep); border-radius:5px; overflow:hidden; }
+.bar-fill{ height:100%; border-radius:5px; }
+.bar-row .bv{ width:44px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft); flex-shrink:0;}
+
+.callout{
+  border:1px solid var(--line);
+  border-left:3px solid var(--brass);
+  background:var(--panel);
+  padding:18px 22px;
+  border-radius:2px;
+  margin-top:10px;
+}
+.callout .ct{ font-size:13px; font-weight:700; color:var(--ink); margin-bottom:10px; }
+.callout ul{ margin:0; padding-left:18px; }
+.callout li{ font-size:13px; color:var(--ink-soft); margin-bottom:5px; line-height:1.5; }
+.callout li b{ color:var(--ink); font-weight:600; }
+.callout.warn{ border-left-color:var(--rust); }
+.callout.flag{ border-left-color:var(--slate); }
+
+.chip-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.chip{
+  font-size:12.5px;
+  padding:6px 12px;
+  border-radius:20px;
+  background:var(--paper-deep);
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+}
+
+.future-table{ width:100%; border-collapse:collapse; margin-top:6px; }
+.future-table tr{ border-bottom:1px solid var(--line); }
+.future-table td{ padding:11px 4px; font-size:13.5px; vertical-align:top; }
+.future-table td.n{ font-family:'JetBrains Mono',monospace; color:var(--ink-faint); width:28px; }
+.future-table td.name{ font-weight:600; color:var(--ink); }
+.future-table td.tag{ text-align:right; }
+.pending-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.04em;
+  color:var(--slate);
+  background:var(--slate-tint);
+  padding:4px 9px;
+  border-radius:20px;
+}
+
+.source-note{
+  margin-top:52px;
+  padding:18px 22px;
+  background:var(--paper-deep);
+  border-radius:2px;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  line-height:1.6;
+}
+.source-note b{ color:var(--ink); }
+
+/* ---------- AUDIT SUMMARY (pending state) ---------- */
+.pending-hero{
+  border:1px dashed var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  padding:40px 44px;
+  text-align:center;
+}
+.pending-hero .icon{
+  width:46px; height:46px; border-radius:50%;
+  background:var(--brass-tint); color:var(--brass-dark);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 18px;
+  font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px;
+}
+.pending-hero h2{
+  font-family:'Source Serif 4',serif;
+  font-size:24px; font-weight:600; margin:0 0 10px;
+}
+.pending-hero p{ font-size:14.5px; color:var(--ink-soft); max-width:520px; margin:0 auto; line-height:1.6; }
+
+.connect-panel{
+  margin-top:28px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  overflow:hidden;
+}
+.connect-panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+  background:var(--paper-deep);
+}
+.connect-panel-head .t{ font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); font-weight:600;}
+.open-link{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--brass-dark);
+  background:var(--brass-tint);
+  padding:7px 14px;
+  border-radius:20px;
+  text-decoration:none;
+  font-weight:700;
+  white-space:nowrap;
+}
+.open-link:hover{ background:var(--brass); color:#fff; }
+.dash-frame-wrap{ background:var(--paper-deep); padding:0; position:relative; }
+.dash-frame-wrap iframe{ width:100%; height:520px; border:none; display:block; background:#fff; }
+.fallback-strip{
+  padding:14px 20px;
+  font-size:12.5px;
+  color:var(--ink-faint);
+  border-top:1px solid var(--line);
+  line-height:1.6;
+}
+
+.tech-note{
+  margin-top:22px;
+  padding:18px 22px;
+  background:var(--paper-deep);
+  border-radius:2px;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  line-height:1.65;
+}
+.tech-note b{ color:var(--ink); }
+.tech-note ul{ margin:10px 0 0; padding-left:18px; }
+.tech-note li{ margin-bottom:5px; }
+
+/* ---------- CAPACITY ---------- */
+.capacity-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+  margin-bottom:44px;
+}
+.person-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  padding:22px 22px 20px;
+}
+.person-card.pending{ background:var(--paper-deep); border-style:dashed; }
+.person-head{ display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+.person-dot{ width:10px; height:10px; border-radius:50%; }
+.person-head h3{ font-family:'Source Serif 4',serif; font-size:18px; margin:0; font-weight:600; }
+.person-head .role{ margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink-faint); }
+.sched-block{ margin-bottom:14px; }
+.sched-block .sk{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px; }
+.sched-block .sv{ font-size:13px; color:var(--ink); line-height:1.55; }
+.sched-block .sv .best{ color:var(--brass-dark); font-weight:600; }
+.pending-msg{ font-size:13px; color:var(--ink-faint); font-style:italic; line-height:1.6; }
+
+.section-head + .capacity-note{ margin-top:-10px; margin-bottom:18px; font-size:13.5px; color:var(--ink-soft); max-width:680px; }
+
+.offtime-grid{ display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-bottom:20px; }
+.off-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:13.5px; }
+.off-row .d{ font-weight:600; color:var(--ink); }
+.off-row .n{ color:var(--ink-soft); font-size:12.5px; }
+.status-pill{ font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 9px; border-radius:20px; white-space:nowrap; }
+.status-pill.confirmed{ background:var(--forest-tint); color:var(--forest); }
+.status-pill.tentative{ background:var(--brass-tint); color:var(--brass-dark); }
+.status-pill.company{ background:var(--slate-tint); color:var(--slate); }
+
+.holiday-row{ display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.holiday-row .d{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-faint); width:64px; flex-shrink:0; }
+.holiday-row .n{ color:var(--ink); flex:1; }
+.country-tag{ font-family:'JetBrains Mono',monospace; font-size:9.5px; padding:2px 7px; border-radius:10px; background:var(--paper-deep); color:var(--ink-faint); }
+
+/* ---------- GOAL CARDS (Reflection) ---------- */
+.goal-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  padding:22px 24px;
+  margin-bottom:16px;
+}
+.goal-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:14px; }
+.goal-head .gnum{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--brass-dark); font-weight:700; }
+.goal-head h3{ font-family:'Source Serif 4',serif; font-size:18px; margin:0; font-weight:600; flex:1;}
+.goal-frac{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint); background:var(--paper-deep); padding:4px 10px; border-radius:20px; white-space:nowrap;}
+.chip-row{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px; }
+.proj-chip{
+  font-size:12px;
+  padding:6px 11px 6px 9px;
+  border-radius:6px;
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--paper);
+}
+.proj-chip .od{ width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.proj-chip.st-inflight{ border-color:var(--forest); background:var(--forest-tint); color:var(--forest); font-weight:600; }
+.proj-chip.st-queued{ border-style:dashed; }
+.proj-chip.st-backlog{ opacity:0.62; }
+.goal-q{ font-size:14px; color:var(--ink); line-height:1.55; padding-top:14px; border-top:1px dashed var(--line); margin:0; }
+.goal-q .lbl{ font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--brass-dark); font-weight:700; display:block; margin-bottom:6px;}
+
+.chip-legend{ display:flex; gap:18px; margin:2px 0 28px; flex-wrap:wrap; }
+.chip-legend .li{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--ink-faint); }
+.chip-legend .sw{ width:16px; height:10px; border-radius:3px; border:1px solid var(--line); }
+.chip-legend .sw.li-inflight{ background:var(--forest-tint); border-color:var(--forest); }
+.chip-legend .sw.li-queued{ border-style:dashed; }
+.chip-legend .sw.li-backlog{ opacity:0.6; }
+
+/* ---------- DELEGATE & ELEVATE / KPI (Reflection) ---------- */
+.source-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em;
+  color:var(--ink-faint); background:var(--paper-deep); padding:5px 11px; border-radius:20px;
+  margin-bottom:18px;
+}
+.source-tag .rec{ width:6px; height:6px; border-radius:50%; background:var(--rust); flex-shrink:0; }
+
+.quad-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:8px; }
+.quad-card{ border:1px solid var(--line); background:var(--panel); border-radius:2px; padding:18px 20px; }
+.quad-card.keep{ border-left:3px solid var(--forest); }
+.quad-card.keep-cap{ border-left:3px solid var(--brass); }
+.quad-card.delegate{ border-left:3px solid var(--rust); }
+.quad-head{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; font-weight:700; margin-bottom:4px; }
+.quad-card.keep .quad-head{ color:var(--forest); }
+.quad-card.keep-cap .quad-head{ color:var(--brass-dark); }
+.quad-card.delegate .quad-head{ color:var(--rust); }
+.quad-sub{ font-size:12px; color:var(--ink-faint); margin-bottom:12px; }
+.quad-card ul{ margin:0; padding-left:16px; }
+.quad-card li{ font-size:13px; color:var(--ink); margin-bottom:6px; line-height:1.5; }
+
+.kpi-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:8px; }
+.kpi-card{ border:1px solid var(--line); background:var(--panel); border-radius:2px; padding:16px 20px; }
+.kpi-card .kt{ font-family:'Source Serif 4',serif; font-size:15px; font-weight:600; color:var(--ink); margin-bottom:6px; }
+.kpi-card .kd{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; }
+.kpi-num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--brass-dark); font-weight:700; margin-right:8px; }
+
+.milestone-badge{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; padding:4px 10px; border-radius:20px;
+  background:var(--forest-tint); color:var(--forest); white-space:nowrap;
+}
+.milestone-badge.none{ background:var(--paper-deep); color:var(--ink-faint); }
+.goal-milestone-row{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.goal-milestone-row .mtext{ font-size:12px; color:var(--ink-faint); }
+
+/* ---------- REFLECTION ---------- */
+.reflect-group{ margin-bottom:44px; }
+.reflect-group-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:18px;
+}
+.reflect-group-head .tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--brass-dark);
+  background:var(--brass-tint);
+  padding:5px 10px;
+  border-radius:20px;
+  font-weight:700;
+}
+.reflect-group-head h3{
+  font-family:'Source Serif 4',serif;
+  font-size:19px;
+  margin:0;
+  font-weight:600;
+}
+.reflect-group-head .when{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--ink-faint);
+  margin-left:auto;
+}
+.prompt-card{
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:2px;
+  padding:20px 24px;
+  margin-bottom:12px;
+}
+.prompt-card p.q{ font-size:14.5px; color:var(--ink); margin:0 0 12px; font-weight:500; line-height:1.5; }
+.notes-lines{ height:34px; background-image:repeating-linear-gradient(to bottom, transparent, transparent 16px, var(--line) 17px); }
+.prompt-card.for-george{ border-left:3px solid var(--brass); }
+.who-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:8px;
+  display:block;
+}
+
+/* ---------- PRINT ---------- */
+@media print{
+  .rail{ display:none; }
+  .app{ box-shadow:none; max-width:none; }
+  .page{ display:block !important; padding:26px 6px; page-break-after:always; animation:none; }
+  body{ background:#fff; }
+}
+
+@media (max-width: 900px){
+  .app{ flex-direction:column; }
+  .rail{ position:relative; height:auto; width:100%; flex-direction:row; }
+  .rail-top,.rail-bottom{ display:none; }
+  .rail-tabs{ flex-direction:row; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .tab{ flex-direction:row; padding:14px 12px; flex-shrink:0; }
+  .tab .label{ writing-mode:horizontal-tb; transform:none; white-space:nowrap; }
+  .page{ padding:36px 22px 60px; }
+  .cover-title{ font-size:38px; }
+  .session-strip,.inside-grid,.audit-grid,.stat-strip,
+  .capacity-grid,.kpi-grid,.offtime-grid,.quad-grid{ grid-template-columns:1fr; }
+  .session-item + .session-item{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:14px; margin-top:14px;}
+  .agenda-row{ grid-template-columns:1fr; gap:6px; }
+  .lead-badge{ justify-self:start; margin-top:6px; }
+  .cover-hero{ padding:34px 26px; }
+  .cover-title{ font-size:32px; }
+}
+
+@media (max-width: 480px){
+  .page{ padding:28px 16px 50px; }
+  .cover-hero{ padding:26px 18px; }
+  .cover-title{ font-size:27px; }
+  .cover-tagline{ font-size:15px; }
+  h1.page-title{ font-size:30px; }
+  .day-num{ font-size:26px; }
+  .stat-card .num{ font-size:34px; }
+  .goal-head{ flex-wrap:wrap; }
+  .goal-frac{ margin-left:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <nav class="rail">
+    <div>
+      <div class="rail-top">
+        <div class="rail-mark">GVSS · H2 2026</div>
+      </div>
+      <div class="rail-tabs">
+        <button class="tab active" data-page="cover"><span class="num">01</span><span class="label">Cover</span></button>
+        <button class="tab" data-page="agenda"><span class="num">02</span><span class="label">Agenda</span></button>
+        <button class="tab" data-page="audit"><span class="num">03</span><span class="label">Alignment&nbsp;Summary</span></button>
+        <button class="tab" data-page="capacity"><span class="num">04</span><span class="label">Capacity</span></button>
+        <button class="tab" data-page="reflect"><span class="num">05</span><span class="label">Reflection</span></button>
+      </div>
+    </div>
+    <div class="rail-bottom">JUL 15–16<br>2026</div>
+  </nav>
+
+  <main>
+
+    <!-- ============ PAGE 1 — COVER ============ -->
+    <section class="page active" id="cover">
+      <div class="cover-hero">
+        <div class="cover-kicker">Pre-Planning Packet · Prepared by Yan</div>
+        <h1 class="cover-title">H2 2026 Planning<br><em>Pre-Read.</em></h1>
+        <p class="cover-tagline">2026 Goals Execution Alignment — everything the team needs to walk into the two-day session already oriented.</p>
+
+        <div class="session-strip">
+          <div class="session-item">
+            <div class="k">Dates &amp; Time</div>
+            <div class="v">July 15–16, 2026<br>9:00 AM – 12:00 PM ET</div>
+          </div>
+          <div class="session-item">
+            <div class="k">Format</div>
+            <div class="v">2 days, 3 hours per day</div>
+          </div>
+          <div class="session-item">
+            <div class="k">Participants</div>
+            <div class="v">George · Joseph · Yan</div>
+          </div>
+        </div>
+
+        <div class="purpose-block">
+          <div class="k">Purpose</div>
+          <p>Align on the H2 2026 project plan by reviewing George's 2026 goals, the June 2025–June 2026 project audit, George-identified Q3/Q4 projects, current capacity, intended assignments, key milestones, and individual KPIs.</p>
+        </div>
+      </div>
+
+      <div class="inside-grid">
+        <div class="inside-card" onclick="goTo('agenda')">
+          <div class="n">02</div>
+          <h3>Agenda</h3>
+          <p>The two-day program plan, time block by time block — subject to change.</p>
+        </div>
+        <div class="inside-card" onclick="goTo('audit')">
+          <div class="n">03</div>
+          <h3>Project Audit Alignment Summary</h3>
+          <p>Pending — a direct link to the Portfolio at a Glance once it's finalized.</p>
+        </div>
+        <div class="inside-card" onclick="goTo('capacity')">
+          <div class="n">04</div>
+          <h3>Capacity</h3>
+          <p>George's and Yan's committed schedules, time off, and holidays. Joseph's is still pending.</p>
+        </div>
+      </div>
+      <div class="inside-grid" style="grid-template-columns:1fr; margin-top:16px;">
+        <div class="inside-card" onclick="goTo('reflect')">
+          <div class="n">05</div>
+          <h3>Reflection Prompts</h3>
+          <p>Built from George's 52 identified H2 projects, Yan's draft milestones, and the July 11 pre-work call — organized by goal, plus Delegate &amp; Elevate and Individual KPI.</p>
+        </div>
+      </div>
+
+      <div class="status-note">Note: this agenda reflects the program plan as of June 1, 2026. Day-of sequencing may shift.</div>
+    </section>
+
+    <!-- ============ PAGE 2 — AGENDA ============ -->
+    <section class="page" id="agenda">
+      <div class="eyebrow">Two-Day Program</div>
+      <h1 class="page-title">Agenda</h1>
+      <p class="page-sub">The proposed run of show for both days. Timing and sequence are still subject to change going into the session.</p>
+
+      <div class="day-block">
+        <div class="day-head">
+          <span class="day-num">01</span>
+          <h2>Audit Synthesis, 2026 Goals, and H2 Project Inventory</h2>
+        </div>
+        <p class="day-obj">Objective: present the Project Audit Alignment Summary and use it as context for reviewing George's 2026 goals and H2 project list.</p>
+
+        <div class="agenda-row"><div class="agenda-time">9:00–9:10</div><div class="agenda-what"><strong>Opening</strong><span>Yan frames the purpose, expected decisions, and session flow.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">9:10–9:45</div><div class="agenda-what"><strong>Project Audit Alignment Summary Review</strong><span>Yan briefly runs through projects added to the audit workbook, then presents the Project Audit Alignment Summary.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">9:45–10:15</div><div class="agenda-what"><strong>2026 Goals Review</strong><span>George confirms the 2026 goals and clarifies what success looks like by year-end.</span></div><div class="lead-badge">George</div></div>
+        <div class="agenda-row"><div class="agenda-time">10:15–11:00</div><div class="agenda-what"><strong>H2 Project Inventory Review</strong><span>George, Joseph, and Yan review George's Q3/Q4 project list under each 2026 goal.</span></div><div class="lead-badge">George / Joseph / Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:00–11:35</div><div class="agenda-what"><strong>Initial Priority Direction</strong><span>George leads discussion on which projects are likely H2 priorities, which need more definition, and which should be deferred or removed from current focus.</span></div><div class="lead-badge">George</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:35–11:55</div><div class="agenda-what"><strong>Day 2 Setup</strong><span>Yan recaps items needing Day 2 decisions: final priorities, capacity, timeline, milestones, KPIs, and action items.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:55–12:00</div><div class="agenda-what"><strong>Day 1 Close</strong><span>Yan notes any cleanup needed before Day 2.</span></div><div class="lead-badge">Yan</div></div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <span class="day-num">02</span>
+          <h2>Prioritization, Capacity, Timeline, KPIs, and Final Action Items</h2>
+        </div>
+        <p class="day-obj">Objective: finalize H2 priorities, test them against capacity and timing, review milestones, define individual KPIs, and close with action items.</p>
+
+        <div class="agenda-row"><div class="agenda-time">9:00–9:10</div><div class="agenda-what"><strong>Recap</strong><span>Yan recaps Day 1 discussion and decisions still needed.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">9:10–9:40</div><div class="agenda-what"><strong>Final H2 Prioritization</strong><span>George confirms which projects move forward for H2/Q3 and which are deferred, merged, or removed from current focus.</span></div><div class="lead-badge">George</div></div>
+        <div class="agenda-row"><div class="agenda-time">9:40–10:15</div><div class="agenda-what"><strong>Capacity + Assignment Check</strong><span>George, Joseph, and Yan review intended assignments against workload, timing, dependencies, and known H2 capacity considerations.</span></div><div class="lead-badge">George / Joseph / Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">10:15–10:45</div><div class="agenda-what"><strong>Project Timeline Review</strong><span>Yan presents project target dates through a calendar or Gantt-style view, if available.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">10:45–11:15</div><div class="agenda-what"><strong>Key Milestone Review</strong><span>Joseph and Yan review pre-drafted key milestones for approved projects; George provides direction where needed.</span></div><div class="lead-badge">George / Joseph / Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:15–11:40</div><div class="agenda-what"><strong>Individual KPIs</strong><span>George discusses individual H2 KPIs for Joseph and Yan based on approved project assignments and responsibilities.</span></div><div class="lead-badge">George</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:40–11:55</div><div class="agenda-what"><strong>Final Decisions + Action Items</strong><span>Yan facilitates the wrap-up of decisions made, open items, assigned action items, and deadlines.</span></div><div class="lead-badge">Yan</div></div>
+        <div class="agenda-row"><div class="agenda-time">11:55–12:00</div><div class="agenda-what"><strong>Close</strong><span>Yan recaps the next checkpoint and any ClickUp items that need to be updated.</span></div><div class="lead-badge">Yan</div></div>
+      </div>
+
+      <div class="agenda-note">This is the two-day program plan only. Program summary, critical path, and post-session details live in the full H2 2026 Planning Program document.</div>
+    </section>
+
+    <!-- ============ PAGE 3 — PROJECT AUDIT ALIGNMENT SUMMARY (pending) ============ -->
+    <section class="page" id="audit">
+      <div class="eyebrow">Sourced Separately</div>
+      <h1 class="page-title">Project Audit<br>Alignment Summary</h1>
+      <p class="page-sub">This section reads from a different workbook than the rest of this packet, and that source is mid-revision. Left blank on purpose rather than shipped stale.</p>
+
+      <div class="pending-hero">
+        <div class="icon">···</div>
+        <h2>Waiting on the source to finalize</h2>
+        <p>Once it's finalized, this page gets regenerated the same way it was built the first time — real numbers, no placeholders. Until then, here's the direct link.</p>
+        <div style="margin-top:22px;">
+          <a class="open-link" href="https://script.google.com/a/macros/gvssgroup.com/s/AKfycbxv-1CUXeOhZO-gCF4LRwsuLunXBMJIUO8pEt4cCp0xm7J5pkCImzYjgF5yGtV2Ack-sw/exec" target="_blank" rel="noopener">Open Portfolio at a Glance ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PAGE 4 — CAPACITY ============ -->
+    <section class="page" id="capacity">
+      <div class="eyebrow">Capacity Inputs</div>
+      <h1 class="page-title">Team Capacity</h1>
+      <p class="page-sub">Committed schedules, time off, and holidays — the raw inputs for Day 2's Capacity + Assignment Check. Joseph's schedule isn't in yet.</p>
+
+      <div class="capacity-grid">
+        <div class="person-card">
+          <div class="person-head">
+            <span class="person-dot" style="background:var(--brass)"></span>
+            <h3>George</h3>
+            <span class="role">Founder</span>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Regular · Mon–Fri</div>
+            <div class="sv">4:30–11:30 AM ET — most productive window. <span class="best">Calls best 10:00 AM ET onward.</span></div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Regular · Sat–Sun</div>
+            <div class="sv">4:30–9:30 AM ET, okay for calls.</div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Summer · Mon–Fri</div>
+            <div class="sv">4:30–5:00 PM ET — checking messages only, not a committed working block.</div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Late Aug–Early Sept*</div>
+            <div class="sv">Mon–Tue unavailable, except biweekly Level 10 at 4:00 PM ET. Wed–Fri 4:30 AM–2:00 PM ET.</div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">* Note</div>
+            <div class="sv" style="font-style:italic;color:var(--ink-faint);">Wife back to school work this window — may need revisiting once September arrives; childcare factors still open.</div>
+          </div>
+        </div>
+
+        <div class="person-card">
+          <div class="person-head">
+            <span class="person-dot" style="background:var(--slate)"></span>
+            <h3>Yan</h3>
+            <span class="role">Manila, remote</span>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Mon–Fri · Working Window</div>
+            <div class="sv">7:00 AM–7:00 PM ET</div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Mon–Fri · Actual Hours</div>
+            <div class="sv">8:00 AM–5:00 PM ET. <span class="best">Calls best 9:00 AM–3:00 PM ET.</span></div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Saturday</div>
+            <div class="sv">Flexible, whenever available.</div>
+          </div>
+          <div class="sched-block">
+            <div class="sk">Sunday</div>
+            <div class="sv">Ideally not available; still flexible for emergencies.</div>
+          </div>
+        </div>
+
+        <div class="person-card pending">
+          <div class="person-head">
+            <span class="person-dot" style="background:var(--ink-faint)"></span>
+            <h3>Joseph</h3>
+            <span class="role">Pending</span>
+          </div>
+          <p class="pending-msg">Schedule not yet received. To follow — this card fills in once it's in hand, no other changes needed to the rest of the page.</p>
+        </div>
+      </div>
+
+      <div class="section-head"><span class="dot" style="background:var(--rust)"></span><h2>George — Time Off</h2></div>
+      <div class="offtime-grid">
+        <div>
+          <div class="off-row"><div><div class="d">August 12–16</div><div class="n">Confirmed</div></div><span class="status-pill confirmed">Confirmed</span></div>
+          <div class="off-row"><div><div class="d">August 17–23</div><div class="n">Tentative — Florida, family visit</div></div><span class="status-pill tentative">Tentative</span></div>
+          <div class="off-row"><div><div class="d">November 25–29</div><div class="n">Confirmed</div></div><span class="status-pill confirmed">Confirmed</span></div>
+        </div>
+        <div></div>
+      </div>
+
+      <div class="section-head"><span class="dot" style="background:var(--slate)"></span><h2>Whole Team — Time Off</h2></div>
+      <div class="offtime-grid">
+        <div>
+          <div class="off-row"><div><div class="d">December 20 – January 3</div><div class="n">Company Christmas Break</div></div><span class="status-pill company">Applies to all</span></div>
+        </div>
+        <div></div>
+      </div>
+
+
+      <div class="section-head"><span class="dot" style="background:var(--forest)"></span><h2>Holiday Calendar</h2><span class="count">US + PH</span></div>
+      <div class="offtime-grid">
+        <div>
+          <div class="holiday-row"><span class="d">Jul 3</span><span class="n">Independence Day (Observance)</span><span class="country-tag">US</span></div>
+          <div class="holiday-row"><span class="d">Aug 21</span><span class="n">Ninoy Aquino Day</span><span class="country-tag">PH</span></div>
+          <div class="holiday-row"><span class="d">Aug 31</span><span class="n">National Heroes Day</span><span class="country-tag">PH</span></div>
+          <div class="holiday-row"><span class="d">Sep 7</span><span class="n">Labor Day</span><span class="country-tag">US</span></div>
+          <div class="holiday-row"><span class="d">Oct 12</span><span class="n">Columbus Day</span><span class="country-tag">US</span></div>
+          <div class="holiday-row"><span class="d">Nov 1</span><span class="n">All Saints' Day</span><span class="country-tag">PH</span></div>
+        </div>
+        <div>
+          <div class="holiday-row"><span class="d">Nov 2</span><span class="n">All Souls' Day</span><span class="country-tag">PH</span></div>
+          <div class="holiday-row"><span class="d">Nov 11</span><span class="n">Veterans Day</span><span class="country-tag">US</span></div>
+          <div class="holiday-row"><span class="d">Nov 26</span><span class="n">Thanksgiving Day</span><span class="country-tag">US</span></div>
+          <div class="holiday-row"><span class="d">Dec 24</span><span class="n">Christmas Eve</span><span class="country-tag">—</span></div>
+          <div class="holiday-row"><span class="d">Dec 25</span><span class="n">Christmas Day</span><span class="country-tag">—</span></div>
+          <div class="holiday-row"><span class="d">Dec 31</span><span class="n">Rizal Day</span><span class="country-tag">PH</span></div>
+        </div>
+      </div>
+
+      <div class="callout flag" style="margin-top:8px;">
+        <div class="ct">Worth stress-testing before Day 2</div>
+        <ul>
+          <li>George's committed window is a single weekday-morning block that narrows further from late August. Bring the full Q3/Q4 project list into the Capacity + Assignment Check before finalizing who owns what.</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============ PAGE 5 — REFLECTION ============ -->
+    <section class="page" id="reflect">
+      <div class="eyebrow">Before You Walk In</div>
+      <h1 class="page-title">Reflection Prompts</h1>
+      <p class="page-sub">Built around George's 52 identified H2 projects across all 9 goals. A few open questions per goal for the team to sit with before Day 1 — not a checklist, just something to induce thinking ahead of the room.</p>
+
+      <!-- ============ Q3 & Q4 SNAPSHOT ============ -->
+      <div class="section-head" style="margin-top:0;"><span class="dot" style="background:var(--brass)"></span><h2>Q3 &amp; Q4 2026 Snapshot</h2><span class="count">16 of 52 projects</span></div>
+      <p style="font-size:13.5px;color:var(--ink-soft);max-width:680px;margin:-6px 0 22px;">The projects George has targeted for the second half of this year, by quarter. Everything else on the full list sits beyond Q4 or without a target quarter yet.</p>
+
+      <div class="audit-grid">
+        <div>
+          <div class="bg-title" style="margin-bottom:12px;">Q3 2026 · 11 projects</div>
+          <table class="future-table">
+            <tr><td class="name">Brand Refresh</td><td class="tag"><span class="pending-tag">G1 · George · CORE</span></td></tr>
+            <tr><td class="name">Business Flywheel + Loyalty Rewards</td><td class="tag"><span class="pending-tag">G1 · George · Mini</span></td></tr>
+            <tr><td class="name">Instagram Raffle & Local-Following Growth</td><td class="tag"><span class="pending-tag">G2 · Yan · Mini</span></td></tr>
+            <tr><td class="name">Loyalty / Rewards Program Redesign</td><td class="tag"><span class="pending-tag">G2 · George · CORE</span></td></tr>
+            <tr><td class="name">Secret Shopper Pricing System</td><td class="tag"><span class="pending-tag">G3 · Joseph · Mini</span></td></tr>
+            <tr><td class="name">IMS Dashboard & Reorder Automation</td><td class="tag"><span class="pending-tag">G3 · Joseph · CORE</span></td></tr>
+            <tr><td class="name">Standardized Employee Stockout Reporting</td><td class="tag"><span class="pending-tag">G3 · Joseph · Mini</span></td></tr>
+            <tr><td class="name">Quarterly COGS / Inventory-Budget Readjustment</td><td class="tag"><span class="pending-tag">G3 · Espie · Mini</span></td></tr>
+            <tr><td class="name">GV Group Intranet</td><td class="tag"><span class="pending-tag">G4 · Joseph · Mini</span></td></tr>
+            <tr><td class="name">New-Site Sourcing, Tracking & Scoring</td><td class="tag"><span class="pending-tag">G6 · Yan · CORE</span></td></tr>
+            <tr><td class="name">Decide Kiss Studio's Use</td><td class="tag"><span class="pending-tag">G7 · George · Mini</span></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="bg-title" style="margin-bottom:12px;">Q4 2026 · 5 projects</div>
+          <table class="future-table">
+            <tr><td class="name">Master KPI System & Tracker</td><td class="tag"><span class="pending-tag">G4 · Joseph · CORE</span></td></tr>
+            <tr><td class="name">Chart of Accounts Redesign</td><td class="tag"><span class="pending-tag">G4 · George · Mini</span></td></tr>
+            <tr><td class="name">GM Development & Coaching</td><td class="tag"><span class="pending-tag">G5 · George · CORE</span></td></tr>
+            <tr><td class="name">Hiring & Onboarding System</td><td class="tag"><span class="pending-tag">G5 · George · Mini</span></td></tr>
+            <tr><td class="name">New-Store Opening Playbook</td><td class="tag"><span class="pending-tag">G6 · Yan · Mini</span></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============ GOAL-BY-GOAL ============ -->
+      <div class="section-head"><span class="dot" style="background:var(--slate)"></span><h2>By Goal</h2></div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">01</span><h3>Strengthen the Brand</h3><span class="goal-frac">5 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Brand Refresh — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Business Flywheel + Loyalty Rewards — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>GV Retail Website — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Seasonal Branded-Merch Planning — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Community Events Planning — Yan · Mini</span>
+        </div>
+        <p class="goal-q">Of these five, which does the team feel most confident can actually land within H2 — and which needs more definition before it's real?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">02</span><h3>Build a Loyalty Moat</h3><span class="goal-frac">3 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Instagram Raffle & Local-Following Growth — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Loyalty / Rewards Program Redesign — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Monthly Promotion Eligibility & Selection — Joseph · Mini</span>
+        </div>
+        <p class="goal-q">The Rewards Program Redesign is the anchor here. Does everything else in this goal genuinely depend on it landing first, or can they move in parallel?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">03</span><h3>Improve Margins</h3><span class="goal-frac">8 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Secret Shopper Pricing System — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>IMS Dashboard & Reorder Automation — Joseph · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Standardized Employee Stockout Reporting — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--forest)"></span>Quarterly COGS / Inventory-Budget Readjustment — Espie · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Automated Quarterly Pricing Recalibration — Joseph · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Disposable Testing & Tester-Rating Aggregator — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Quarterly Competitor Evaluation Sheet — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>New-Product Rotation System — Joseph · Mini</span>
+        </div>
+        <p class="goal-q">Eight projects, almost all under Joseph. Is that the right amount of margin work for one person to carry through H2 — and what would need to move if it isn't?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">04</span><h3>Systematize &amp; Scale Operations</h3><span class="goal-frac">11 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>GV Group Intranet — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Master KPI System & Tracker — Joseph · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Chart of Accounts Redesign — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Action Item OCR & Feedback-to-Insight — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>File Foldering System + SOP — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Cloud Migration — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Inbound Mail Capture, Catalog & Routing — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--ink-faint)"></span>Store Alarm System Unification — Team · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Quarterly-Review Post-Meeting Debrief — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>QuickBooks → Intuit Enterprise Suite — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Operational Issue Ticketing System — Joseph · Mini</span>
+        </div>
+        <p class="goal-q">Eleven projects spread across Joseph, Yan, and George. Which two or three actually move the needle most this half, and which are genuinely fine to leave for 2027?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">05</span><h3>Build a High-Caliber Remote Team</h3><span class="goal-frac">11 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>GM Development & Coaching (Joanne & Kenny) — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Hiring & Onboarding System — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Alerts / Exception Dashboard — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Roles, Responsibilities & KPI Database — Joseph · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Employee Behavior & Training Framework — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Annual Team & Decision-Making Review — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--plum)"></span>Employee Info & Pay-History Database — Joseph · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Redefine Core-Team Titles & Roles — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Annual Employee Survey System — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>AI-Augmented Resourcefulness Training — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Mail-Handling System & Process (PA) — George · Mini</span>
+        </div>
+        <p class="goal-q">This goal touches nearly every core team member in some way. Where does the team most need clarity before committing to specific projects here?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">06</span><h3>Prepare for 2027 Expansion</h3><span class="goal-frac">11 projects</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>New-Site Sourcing, Tracking & Scoring — Yan · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>New-Store Opening Playbook — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Execute 2027 PA Store Openings (3, stretch 4) — George · CORE</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>AI Lease Register & Renewal Monitor — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>PA Expansion Scouting Campaign (Jul–Aug) — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Q3/Q4 Project + Hiring Roadmap — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Deal-Sourcing & Acquisition Analysis Engine — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Next-Business Analysis: Pest Control vs Landscaping — George · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Broker-Communication Process — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--slate)"></span>Competitor Teardown: Higher Up Smoke Shop — Yan · Mini</span>
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Regulatory-Shakeout Opportunity Play — George · Mini</span>
+        </div>
+        <p class="goal-q">With store openings targeted for H1'27, how much of this list is genuinely prep work for that — versus separate initiatives competing for the same time?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">07</span><h3>Activate Kiss Studio</h3><span class="goal-frac">1 project</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Decide Kiss Studio's Use (activate / lease / sell) — George · Mini</span>
+        </div>
+        <p class="goal-q">A single decision, not a build. Does it need its own deadline, or does it get made as a byproduct of the rest of the H2 conversation?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">08</span><h3>Open Wholesale Business</h3><span class="goal-frac">1 project</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Launch Wholesale Business (EC Distro) — George · CORE</span>
+        </div>
+        <p class="goal-q">Targeted for H1'27 and CORE-scale. Is this genuinely an H2 priority, or a 2027 conversation that just happens to be on this list early?</p>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-head"><span class="gnum">09</span><h3>Establish a BPO</h3><span class="goal-frac">1 project</span></div>
+        <div class="chip-row">
+          <span class="proj-chip"><span class="od" style="background:var(--brass)"></span>Inventory Solution via BPO (pilot + gate) — George · CORE</span>
+        </div>
+        <p class="goal-q">Same question as Wholesale — does H1'27 timing hold once everything else on the roadmap is accounted for?</p>
+      </div>
+
+      <!-- ============ INDIVIDUAL KPI ============ -->
+      <div class="reflect-group" style="margin-top:52px;">
+        <div class="reflect-group-head">
+          <span class="tag">Day 2 · 11:15–11:40</span>
+          <h3>Individual KPIs</h3>
+          <span class="when">Led by George</span>
+        </div>
+        <div class="source-tag"><span class="rec"></span>Already started — draft themes from the July 11 call</div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">01</span>Ownership &amp; Follow-Through</div><div class="kd">Not just doing what was asked — owning whether the solution actually solves the problem, and saying so if it doesn't.</div></div>
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">02</span>Reduction of Founder Dependency</div><div class="kd">Fewer decisions coming back to George. The team runs the full arc after his initial sign-off, without needing him mid-project.</div></div>
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">03</span>Milestone &amp; Project Completion</div><div class="kd">Dates get hit once "done" is clearly defined up front — needs a shared definition of done per project.</div></div>
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">04</span>Business &amp; Operational Outcomes</div><div class="kd">Tied back to something countable where possible — dollars saved, revenue added, time reclaimed.</div></div>
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">05</span>Timeliness &amp; Reliability</div><div class="kd">Work lands on time and at the expected quality level, consistently, not just occasionally.</div></div>
+          <div class="kpi-card"><div class="kt"><span class="kpi-num">06</span>Solutions Orientation</div><div class="kd">Bringing a recommendation alongside a problem, not just flagging it and waiting on George to decide.</div></div>
+        </div>
+
+        <div class="prompt-card" style="margin-top:6px;">
+          <p class="q">These were named live, not as a finished KPI list but as raw material — genuinely hard to pin down before projects are even planned. Which of the six can become an actual number before Day 2, and which stay qualitative for this half?</p>
+          <div class="notes-lines"></div>
+        </div>
+        <div class="prompt-card">
+          <p class="q">Give the destination, not the driving directions — delegate the outcome, not the how. Do the themes above measure outcomes, or do a few of them still quietly measure process?</p>
+          <div class="notes-lines"></div>
+        </div>
+      </div>
+
+      <!-- ============ CAPACITY TIE-IN ============ -->
+      <div class="reflect-group">
+        <div class="reflect-group-head">
+          <span class="tag">Day 2 · 9:40–10:15</span>
+          <h3>Capacity + Assignment Check</h3>
+          <span class="when">Led by George / Joseph / Yan</span>
+        </div>
+        <div class="prompt-card">
+          <p class="q">George's committed weekday window is a single morning block, and it narrows further from late August (see Capacity page). Does the Q3/Q4 project list above actually fit inside that reality, or does something need to move?</p>
+          <div class="notes-lines"></div>
+        </div>
+        <div class="prompt-card">
+          <p class="q">Joseph's committed schedule is still pending. Flag as an open item for this check — the capacity conversation is incomplete without it.</p>
+          <div class="notes-lines"></div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script>
+function goTo(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('.tab[data-page="'+id+'"]').classList.add('active');
+  document.querySelector('main').scrollTo(0,0);
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=> goTo(tab.dataset.page));
+});
+</script>
+
+</body>
+</html>
