@@ -632,6 +632,19 @@ h1.page-title{
 .goal-milestone-row{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
 .goal-milestone-row .mtext{ font-size:12px; color:var(--ink-faint); }
 
+.workdays-table{ width:100%; border-collapse:collapse; margin-top:14px; }
+.workdays-table th{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
+  color:var(--ink-faint); font-weight:600; text-align:right; padding:0 4px 10px; border-bottom:2px solid var(--ink);
+}
+.workdays-table th:first-child{ text-align:left; }
+.workdays-table td{ padding:11px 4px; font-size:14px; text-align:right; border-bottom:1px solid var(--line); font-family:'JetBrains Mono',monospace; color:var(--ink); }
+.workdays-table td:first-child{ text-align:left; font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px; }
+.workdays-table td.total{ font-weight:700; color:var(--brass-dark); background:var(--brass-tint); border-radius:2px; }
+.workdays-table th.total{ color:var(--brass-dark); }
+.workdays-foot{ margin-top:14px; font-size:12px; color:var(--ink-faint); line-height:1.6; }
+.workdays-foot li{ margin-bottom:4px; }
+
 /* ---------- REFLECTION ---------- */
 .reflect-group{ margin-bottom:44px; }
 .reflect-group-head{
@@ -868,7 +881,41 @@ h1.page-title{
       <h1 class="page-title">Team Capacity</h1>
       <p class="page-sub">Committed schedules, time off, and holidays — the raw inputs for Day 1's Capacity Check. All three schedules are in.</p>
 
-      <div class="capacity-grid">
+      <table class="workdays-table">
+        <tr>
+          <th>Working Days Left · Jul 15–Dec 31</th>
+          <th>Jul 15–31</th>
+          <th>Aug</th>
+          <th>Sep</th>
+          <th>Oct</th>
+          <th>Nov</th>
+          <th>Dec</th>
+          <th class="total">Total</th>
+        </tr>
+        <tr>
+          <td>George</td>
+          <td>13</td><td>12</td><td>21</td><td>21</td><td>16</td><td>14</td>
+          <td class="total">97</td>
+        </tr>
+        <tr>
+          <td>Joseph</td>
+          <td>13</td><td>19</td><td>21</td><td>21</td><td>18</td><td>20</td>
+          <td class="total">112</td>
+        </tr>
+        <tr>
+          <td>Yan</td>
+          <td>13</td><td>19</td><td>21</td><td>21</td><td>18</td><td>14</td>
+          <td class="total">106</td>
+        </tr>
+      </table>
+
+      <ul class="workdays-foot">
+        <li>Weekdays only, minus the holiday calendar, the December downtime window, and each person's filed time off.</li>
+        <li>Joseph's December is higher — the Dec 20–31 downtime window is a corporate slowdown, not a holiday, and retail's busiest season means it doesn't apply to him. He still takes the three actual holidays in that window off (Dec 24, 25, 31), same as everyone else.</li>
+        <li>George's total assumes his tentative Aug 17–23 is also taken, as the conservative estimate — confirmed-only, it would be 101 days.</li>
+      </ul>
+
+      <div class="capacity-grid" style="margin-top:36px;">
         <div class="person-card">
           <div class="person-head">
             <span class="person-dot" style="background:var(--brass)"></span>
@@ -952,13 +999,14 @@ h1.page-title{
         <div></div>
       </div>
 
-      <div class="section-head"><span class="dot" style="background:var(--slate)"></span><h2>Whole Team — Time Off</h2></div>
+      <div class="section-head"><span class="dot" style="background:var(--slate)"></span><h2>December Downtime</h2></div>
       <div class="offtime-grid">
         <div>
-          <div class="off-row"><div><div class="d">December 20 – January 3</div><div class="n">Company Christmas Break</div></div><span class="status-pill company">Applies to all</span></div>
+          <div class="off-row"><div><div class="d">December 20 – January 3</div><div class="n">Corporate slowdown, not a holiday</div></div><span class="status-pill company">George &amp; Yan</span></div>
         </div>
         <div></div>
       </div>
+      <p style="font-size:12.5px;color:var(--ink-faint);margin:-8px 0 0;">Doesn't apply to Joseph — retail's busiest season means he works through it, minus the three actual holidays inside the window (Dec 24, 25, 31).</p>
 
 
       <div class="section-head"><span class="dot" style="background:var(--forest)"></span><h2>Holiday Calendar</h2><span class="count">US + PH</span></div>
@@ -981,7 +1029,7 @@ h1.page-title{
         </div>
       </div>
 
-      <div class="callout flag" style="margin-top:8px;">
+      <div class="callout flag" style="margin-top:24px;">
         <div class="ct">Worth stress-testing before Day 2</div>
         <ul>
           <li>George's committed window is a single weekday-morning block that narrows further from late August. Bring the full Q3/Q4 project list into Day 2's Final Road Map discussion before finalizing who owns what.</li>
